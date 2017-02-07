@@ -1,6 +1,6 @@
 <?php
 
-namespace Sypherlev\Architect;
+namespace SypherLev\Architect;
 
 use SypherLev\Blueprint\Blueprint;
 use SypherLev\Blueprint\QueryBuilders\QueryInterface;

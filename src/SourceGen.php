@@ -1,6 +1,6 @@
 <?php
 
-namespace Sypherlev\Architect;
+namespace SypherLev\Architect;
 
 use SypherLev\Blueprint\QueryBuilders\MySql\MySqlSource;
 

@@ -13,7 +13,7 @@ $autoloadFiles = [
 
 foreach ($autoloadFiles as $autoloadFile) {
     if (file_exists($autoloadFile)) {
-        $autoload = $autoloadFile;
+        $autoload = realpath($autoloadFile);
         break;
     }
 }
@@ -33,8 +33,8 @@ $dotenv->load();
 array_shift($argv);
 
 $database_prefix = array_shift($argv);
-$sourceGen = new \Sypherlev\Architect\SourceGen();
+$sourceGen = new \SypherLev\Architect\SourceGen();
 $source = $sourceGen->generateSource($database_prefix);
 
-$architect = new \Sypherlev\Architect\Architect($source, new \SypherLev\Blueprint\QueryBuilders\MySql\MySqlQuery());
+$architect = new \SypherLev\Architect\Architect($source, new \SypherLev\Blueprint\QueryBuilders\MySql\MySqlQuery());
 $architect->build($argv);
