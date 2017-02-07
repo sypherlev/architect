@@ -1,4 +1,4 @@
 # Architect
-Pseudo-ORM extension to Blueprint
+Data class generator for sypherlev/blueprint
 
 *under construction*

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Starting Architect Build Tool..."
+
+chphpexe=$(which php)
+output=$($chphpexe $PWD/vendor/sypherlev/architect/src/script.php $1 $2 $3)
+echo "$output"
+exit 0

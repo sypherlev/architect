@@ -1,0 +1,39 @@
+{
+  "name": "sypherlev/architect",
+  "description": "Data class generator for sypherlev/blueprint",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "sql",
+    "database",
+    "query",
+    "orm"
+  ],
+  "autoload": {
+    "psr-4": {
+      "SypherLev\\Architect\\": "src"
+    }
+  },
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.0",
+    "sypherlev/blueprint": "@dev",
+    "vlucas/phpdotenv": "^2.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.7.*",
+    "pds/skeleton": "~1.0"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "bin": [
+    "bin/architect"
+  ],
+  "authors": [
+    {
+      "name": "Claire Ryan",
+      "email": "claire@raynfall.com"
+    }
+  ]
+}
