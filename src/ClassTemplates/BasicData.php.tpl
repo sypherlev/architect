@@ -28,7 +28,7 @@ class {className}Data extends Blueprint
         $this->addPattern('edit', function() {
             return (new Pattern())
                 ->table('{name}')
-                ->columns([{edit_columns]);
+                ->columns([{edit_columns}]);
         });
     }
 
