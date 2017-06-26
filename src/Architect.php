@@ -20,7 +20,7 @@ class Architect extends Blueprint
         }
         $name = array_shift($argv);
 
-        $templateFile = 'BasicData.php.tpl';
+        $templateFile = __DIR__.'/ClassTemplates/BasicData.php.tpl';
         if(!empty($argv)) {
             $filename = ltrim(array_shift($argv), '/');
             $templateFile = realpath("/../../../../".$filename);
@@ -30,7 +30,12 @@ class Architect extends Blueprint
             die;
         }
         $templateString = file_get_contents($templateFile);
-        $className = ucfirst($name);
+
+        $chunkName = explode('_', $name);
+        $className = "";
+        foreach ($chunkName as $c) {
+            $className .= ucfirst($c);
+        }
 
         $sql = "SHOW COLUMNS FROM $name";
 
@@ -41,15 +46,15 @@ class Architect extends Blueprint
         $primary = "";
         foreach ($columns as $col) {
             if($col->Key == 'PRI') {
-                $primary = $col->id;
-                if(strpos($col->extra, 'auto_increment') === false) {
-                    $createArray[] = $col->id;
-                    $editArray[] = $col->id;
+                $primary = $col->Field;
+                if(strpos($col->Extra, 'auto_increment') === false) {
+                    $createArray[] = $col->Field;
+                    $editArray[] = $col->Field;
                 }
             }
             else {
-                $createArray[] = $col->id;
-                $editArray[] = $col->id;
+                $createArray[] = $col->Field;
+                $editArray[] = $col->Field;
             }
         }
 
@@ -63,11 +68,11 @@ class Architect extends Blueprint
         }
 
         $templateString = str_replace('{name}', $name, $templateString);
-        $templateString = str_replace('{classname}', $className, $templateString);
+        $templateString = str_replace('{className}', $className, $templateString);
         $templateString = str_replace('{primary}', $primary, $templateString);
         $templateString = str_replace('{create_columns}', '\''.implode("','", $createArray).'\'', $templateString);
         $templateString = str_replace('{edit_columns}', '\''.implode("','", $editArray).'\'', $templateString);
-        $targetFile = 'src'.DIRECTORY_SEPARATOR.'DBAL'.$className.'Data.php';
+        $targetFile = 'src'.DIRECTORY_SEPARATOR.'DBAL'.DIRECTORY_SEPARATOR.$className.'Data.php';
         if(!file_exists('src')) {
             mkdir('src');
         }
