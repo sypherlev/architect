@@ -37,33 +37,24 @@ class Architect extends Blueprint
             $className .= ucfirst($c);
         }
 
-        $sql = "SHOW COLUMNS FROM $name";
-
-        $columns = $this->source->raw($sql, [':table' => $name], 'fetchAll');
+        $columns = $this->getTableColumns($name);
 
         $editArray = [];
         $createArray = [];
-        $primary = "";
+        $primary = $this->getPrimaryKey($name);
         foreach ($columns as $col) {
-            if($col->Key == 'PRI') {
-                $primary = $col->Field;
-                if(strpos($col->Extra, 'auto_increment') === false) {
-                    $createArray[] = $col->Field;
-                    $editArray[] = $col->Field;
-                }
+            if($col != $primary) {
+                $createArray[] = $col;
             }
-            else {
-                $createArray[] = $col->Field;
-                $editArray[] = $col->Field;
-            }
+            $editArray[] = $col;
         }
 
         if($primary == "") {
             echo "No primary key detected. Aborting build...\n\n";
             die;
         }
-        if(empty($createArray) || empty($editArray)) {
-            echo "No primary key detected. Aborting build...\n\n";
+        if(empty($editArray)) {
+            echo "No editable columns detected. Aborting build...\n\n";
             die;
         }
 

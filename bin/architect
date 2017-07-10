@@ -1,6 +1,11 @@
 #!/bin/bash
 
 echo "Starting Architect Build Tool..."
+if [ $# -eq 0 ]
+    then echo "Use Architect to build basic Blueprint classes for use with the Chassis framework. Command format:"
+    echo "  bin/architect <database prefix> <table name> <optional template file name>"
+    exit
+fi
 
 chphpexe=$(which php)
 output=$($chphpexe $PWD/vendor/sypherlev/architect/src/script.php $1 $2 $3)

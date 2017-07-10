@@ -36,5 +36,5 @@ $database_prefix = array_shift($argv);
 $sourceGen = new \SypherLev\Architect\SourceGen();
 $source = $sourceGen->generateSource($database_prefix);
 
-$architect = new \SypherLev\Architect\Architect($source, new \SypherLev\Blueprint\QueryBuilders\MySql\MySqlQuery());
+$architect = new \SypherLev\Architect\Architect($source, $source->generateNewQuery());
 $architect->build($argv);
