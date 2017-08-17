@@ -32,14 +32,21 @@ class {className}Data extends Blueprint
         });
     }
 
-    public function findOne($primary_key, $pattern = 'whole') {
+    public function getOneByKey($primary_key, $pattern = 'whole') {
         return $this->select()
             ->withPattern($pattern)
             ->where(['{primary}' => $primary_key])
             ->one();
     }
 
-    public function findMany(Array $clauses, $pattern = 'whole', $limit = 1000, $offset = 0) {
+    public function getOneByColumn($column, $value, $pattern = 'whole') {
+        return $this->select()
+        ->withPattern($pattern)
+        ->where([$column => $value])
+        ->one();
+    }
+
+    public function getManyByColumns(Array $clauses, $pattern = 'whole', $limit = 1000, $offset = 0) {
         return $this->select()
             ->withPattern($pattern)
             ->where($clauses)
@@ -47,10 +54,11 @@ class {className}Data extends Blueprint
             ->many();
     }
 
-    public function edit(Array $update) {
+    public function editByKey($primary_key, Array $update) {
         return $this->update()
             ->withPattern('edit')
             ->set($update)
+            ->where(['{primary}' => $primary_key])
             ->execute();
     }
 
