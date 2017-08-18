@@ -63,10 +63,14 @@ class {className}Data extends Blueprint
     }
 
     public function create(Array $new) {
-        return $this->insert()
+        $check = $this->insert()
             ->withPattern('create')
             ->add($new)
             ->execute();
+        if($check) {
+            return $this->source->lastInsertId();
+        }
+        return false;
     }
 
     public function createBatch(Array $batch) {
