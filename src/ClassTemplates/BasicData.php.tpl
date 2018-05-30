@@ -83,4 +83,15 @@ class {className}Data extends Blueprint
         }
         return false;
     }
+
+    /**
+     * Add your own functions here. If you ever need to regenerate this file using Architect,
+     * functions between // START CUSTOM and // END CUSTOM will not be erased.
+     */
+
+    // START CUSTOM
+
+    {existing}
+
+    // END CUSTOM
 }

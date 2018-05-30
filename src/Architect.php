@@ -72,6 +72,9 @@ class Architect extends Blueprint
         }
         touch($targetFile);
         if(file_exists($targetFile)) {
+            $target_file_string = file_get_contents($targetFile);
+            $existing = $this->getStringBetween($target_file_string, "// START CUSTOM", "// END CUSTOM");
+            $templateString = str_replace('{existing}', $existing, $templateString);
             file_put_contents($targetFile, $templateString);
             echo "Build complete. File generated at $targetFile.\n\n";
             die;
@@ -80,5 +83,18 @@ class Architect extends Blueprint
             echo "Could not create file $targetFile. Aborting build...\n\n";
             die;
         }
+    }
+
+    // credit to Justin Cook for this: http://www.justin-cook.com/2006/03/31/php-parse-a-string-between-two-strings/
+    private function getStringBetween($string, $start, $end){
+        if(strlen($string) == 0) {
+            return "";
+        }
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }
