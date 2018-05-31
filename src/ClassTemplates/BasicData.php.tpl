@@ -30,6 +30,18 @@ class {className}Data extends Blueprint
                 ->table('{name}')
                 ->columns([{edit_columns}]);
         });
+
+        /**
+        * Add your own Patterns, Filters, and Transformations here.
+        * If you ever need to regenerate this file using Architect,
+        * elements between // START CONSTRUCT and // END CONSTRUCT will not be erased.
+        */
+
+        // START CONSTRUCT
+
+        {existing_construct}
+
+        // END CONSTRUCT
     }
 
     public function getOneByKey($primary_key, $pattern = 'whole') {
@@ -91,7 +103,7 @@ class {className}Data extends Blueprint
 
     // START CUSTOM
 
-    {existing}
+    {existing_functions}
 
     // END CUSTOM
 }
