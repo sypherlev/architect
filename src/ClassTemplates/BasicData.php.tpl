@@ -34,7 +34,7 @@ class {className}Data extends Blueprint
         /**
         * Add your own Patterns, Filters, and Transformations here.
         * If you ever need to regenerate this file using Architect,
-        * elements between // START CONSTRUCT and // END CONSTRUCT will not be erased.
+        * elements between START CONSTRUCT and END CONSTRUCT will not be erased.
         */
 
         // START CONSTRUCT
@@ -98,7 +98,7 @@ class {className}Data extends Blueprint
 
     /**
      * Add your own functions here. If you ever need to regenerate this file using Architect,
-     * functions between // START CUSTOM and // END CUSTOM will not be erased.
+     * functions between START CUSTOM and END CUSTOM will not be erased.
      */
 
     // START CUSTOM
