@@ -80,7 +80,7 @@ class {className}Data extends Blueprint
             ->add($new)
             ->execute();
         if($check) {
-            return $this->source->lastInsertId();
+            return $this->source->lastInsertId('{name}');
         }
         return false;
     }
