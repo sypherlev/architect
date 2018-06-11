@@ -73,8 +73,10 @@ class Architect extends Blueprint
         touch($targetFile);
         if(file_exists($targetFile)) {
             $target_file_string = file_get_contents($targetFile);
+            $existing_uses = trim($this->getStringBetween($target_file_string, "// START USES", "// END USES"));
             $existing_functions = trim($this->getStringBetween($target_file_string, "// START CUSTOM", "// END CUSTOM"));
             $existing_construct = trim($this->getStringBetween($target_file_string, "// START CONSTRUCT", "// END CONSTRUCT"));
+            $templateString = str_replace('{existing_uses}', $existing_uses, $templateString);
             $templateString = str_replace('{existing_functions}', $existing_functions, $templateString);
             $templateString = str_replace('{existing_construct}', $existing_construct, $templateString);
             file_put_contents($targetFile, $templateString);

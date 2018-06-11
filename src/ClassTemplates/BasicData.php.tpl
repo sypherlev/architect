@@ -2,6 +2,17 @@
 
 namespace App\DBAL;
 
+/**
+* Add your own use clauses here. If you ever need to regenerate this file
+* using Architect, elements between START USES and END USES will not be erased.
+*/
+
+// START USES
+
+{existing_uses}
+
+// END USES
+
 use SypherLev\Blueprint\Blueprint;
 use SypherLev\Blueprint\Elements\Pattern;
 use SypherLev\Blueprint\QueryBuilders\QueryInterface;
