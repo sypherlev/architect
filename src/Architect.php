@@ -13,7 +13,7 @@ class Architect extends Blueprint
         parent::__construct($source, $query);
     }
 
-    public function build($argv) {
+    public function build($argv, $database_prefix) {
         if(empty($argv)) {
             echo "No table specified. Aborting build...\n\n";
             die;
@@ -59,16 +59,20 @@ class Architect extends Blueprint
         }
 
         $templateString = str_replace('{name}', $name, $templateString);
+        $templateString = str_replace('{database_name}', ucfirst($database_prefix), $templateString);
         $templateString = str_replace('{className}', $className, $templateString);
         $templateString = str_replace('{primary}', $primary, $templateString);
         $templateString = str_replace('{create_columns}', '\''.implode("','", $createArray).'\'', $templateString);
         $templateString = str_replace('{edit_columns}', '\''.implode("','", $editArray).'\'', $templateString);
-        $targetFile = 'src'.DIRECTORY_SEPARATOR.'DBAL'.DIRECTORY_SEPARATOR.$className.'Data.php';
+        $targetFile = 'src'.DIRECTORY_SEPARATOR.'DBAL'.DIRECTORY_SEPARATOR.ucfirst($database_prefix). DIRECTORY_SEPARATOR . $className.'Data.php';
         if(!file_exists('src')) {
             mkdir('src');
         }
         if(!file_exists('src'.DIRECTORY_SEPARATOR.'DBAL')) {
             mkdir('src'.DIRECTORY_SEPARATOR.'DBAL');
+        }
+        if(!file_exists('src'.DIRECTORY_SEPARATOR.'DBAL'.DIRECTORY_SEPARATOR . ucfirst($database_prefix))) {
+            mkdir('src'.DIRECTORY_SEPARATOR.'DBAL'.DIRECTORY_SEPARATOR . ucfirst($database_prefix));
         }
         touch($targetFile);
         if(file_exists($targetFile)) {

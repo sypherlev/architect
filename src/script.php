@@ -37,4 +37,4 @@ $sourceGen = new \SypherLev\Architect\SourceGen();
 $source = $sourceGen->generateSource($database_prefix);
 
 $architect = new \SypherLev\Architect\Architect($source, $source->generateNewQuery());
-$architect->build($argv);
+$architect->build($argv, $database_prefix);

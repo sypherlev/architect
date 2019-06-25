@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DBAL;
+namespace App\DBAL\{database_name};
 
 /**
 * Add your own use clauses here. If you ever need to regenerate this file
