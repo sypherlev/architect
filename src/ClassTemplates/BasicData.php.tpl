@@ -55,21 +55,21 @@ class {className}Data extends Blueprint
         // END CONSTRUCT
     }
 
-    public function getOneByKey($primary_key, $pattern = 'whole') {
+    public function getOneByKey(int $primary_key, string $pattern = 'whole') : \stdClass {
         return $this->select()
             ->withPattern($pattern)
             ->where(['{primary}' => $primary_key])
             ->one();
     }
 
-    public function getOneByColumn($column, $value, $pattern = 'whole') {
+    public function getOneByColumn(string $column, $value, stirng $pattern = 'whole') : \stdClass {
         return $this->select()
         ->withPattern($pattern)
         ->where([$column => $value])
         ->one();
     }
 
-    public function getManyByColumns(Array $clauses, $pattern = 'whole', $limit = 1000, $offset = 0) {
+    public function getManyByColumns(Array $clauses, string $pattern = 'whole', int $limit = 1000, int $offset = 0) : array {
         return $this->select()
             ->withPattern($pattern)
             ->where($clauses)
@@ -77,7 +77,7 @@ class {className}Data extends Blueprint
             ->many();
     }
 
-    public function editByKey($primary_key, Array $update) {
+    public function editByKey(int $primary_key, Array $update) : bool {
         return $this->update()
             ->withPattern('edit')
             ->set($update)
@@ -85,7 +85,7 @@ class {className}Data extends Blueprint
             ->execute();
     }
 
-    public function create(Array $new) {
+    public function create(Array $new) : int {
         $check = $this->insert()
             ->withPattern('create')
             ->add($new)
@@ -93,10 +93,10 @@ class {className}Data extends Blueprint
         if($check) {
             return $this->source->lastInsertId('{name}');
         }
-        return false;
+        return 0;
     }
 
-    public function createBatch(Array $batch) {
+    public function createBatch(Array $batch) : bool {
         if(!empty($batch)) {
             $this->insert()->withPattern('create');
             foreach ($batch as $record) {

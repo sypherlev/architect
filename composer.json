@@ -16,7 +16,7 @@
   },
   "prefer-stable": true,
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.2",
     "sypherlev/blueprint": "@dev",
     "vlucas/phpdotenv": "^2.2"
   },
