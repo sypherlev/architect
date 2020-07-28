@@ -62,6 +62,9 @@ class {className}Data extends Blueprint
             ->one();
     }
 
+    /**
+    * @psalm-suppress MissingParamType
+    */
     public function getOneByColumn(string $column, $value, string $pattern = 'whole') : \stdClass {
         return $this->select()
         ->withPattern($pattern)
